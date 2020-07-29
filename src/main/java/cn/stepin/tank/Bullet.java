@@ -10,6 +10,9 @@ public class Bullet {
     public static final int SPEED = 10;
     public static final int WIDTH = ResourceMgr.bulletD.getWidth();
     public static final int HEIGHT = ResourceMgr.bulletD.getHeight();
+
+    Rectangle rect = new Rectangle();
+
     private final TankFrame tf;
     private Group group;
 
@@ -24,6 +27,11 @@ public class Bullet {
         this.dir = dir;
         this.tf = tf;
         this.group = group;
+
+        rect.x = x;
+        rect.y = y;
+        rect.width = WIDTH;
+        rect.height = HEIGHT;
     }
 
     public boolean isLiving() {
@@ -73,6 +81,10 @@ public class Bullet {
                 break;
         }
 
+        //update rect
+        rect.x = x;
+        rect.y = y;
+
         if(x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT){
             living = false;
         }
@@ -82,9 +94,9 @@ public class Bullet {
         if(group.equals(tank.getGroup())){
             return;
         }
-        //TODO 用一个rect来记录子弹的位置
-        Rectangle rect1 = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
-        Rectangle rect2 = new Rectangle(tank.getX(), tank.getY(), Tank.WIDTH, Tank.HEIGHT);
+
+        Rectangle rect1 = rect;
+        Rectangle rect2 = tank.rect;
         if (rect1.intersects(rect2)) {
             tank.die();
             die();
