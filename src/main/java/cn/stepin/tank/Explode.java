@@ -15,13 +15,16 @@ public class Explode {
 
     private boolean living = true;
 
-    private int x,y;
+    private int x, y;
     private int step = 0;
 
     public Explode(int x, int y, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.tf = tf;
+        new Thread(() -> {
+            new Audio("audio/explode.wav").play();
+        }).start();
     }
 
     public boolean isLiving() {
@@ -30,7 +33,7 @@ public class Explode {
 
 
     public void paint(Graphics g) {
-        if(!living){
+        if (!living) {
             return;
         }
 
