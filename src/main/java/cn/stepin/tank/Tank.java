@@ -12,7 +12,7 @@ public class Tank {
     private int x, y;
     private Dir dir = Dir.UP;
 
-    private static final int SPEED = 2;
+    private static final int SPEED = 5;
     public static final int WIDTH = ResourceMgr.badTankD.getWidth();
     public static final int HEIGHT = ResourceMgr.badTankD.getHeight();
 
@@ -111,6 +111,8 @@ public class Tank {
                 break;
         }
 
+        boundsCheck();
+
         if (group.equals(Group.BAD) && random()) {
             fire();
         }
@@ -120,8 +122,23 @@ public class Tank {
         }
     }
 
+    private void boundsCheck() {
+        if (x < 2) {
+            x = 2;
+        }
+        if (x > (TankFrame.GAME_WIDTH - WIDTH - 2)) {
+            x = TankFrame.GAME_WIDTH - WIDTH - 2;
+        }
+        if (y < 32) {
+            y = 32;
+        }
+        if (y > (TankFrame.GAME_HEIGHT - HEIGHT - 2)) {
+            y = TankFrame.GAME_HEIGHT - HEIGHT - 2;
+        }
+    }
+
     private void randomDir() {
-        if(random()) {
+        if (random()) {
             dir = Dir.values()[random.nextInt(4)];
         }
     }
@@ -138,7 +155,7 @@ public class Tank {
         tf.explodes.add(new Explode(x, y, tf));
     }
 
-    public boolean random(){
+    public boolean random() {
         return random.nextInt(100) >= 95;
     }
 }

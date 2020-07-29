@@ -15,9 +15,9 @@ public class Main {
             tf.tanks.add(tank);
         }
 
-        new Thread(() -> {
-            new Audio("audio/war1.wav").loop();
-        }).start();
+//        new Thread(() -> {
+//            new Audio("audio/war1.wav").loop();
+//        }).start();
 
 
         while (true) {
