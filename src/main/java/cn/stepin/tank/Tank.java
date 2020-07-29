@@ -111,8 +111,18 @@ public class Tank {
                 break;
         }
 
-        if (group.equals(Group.BAD) && random.nextInt(20) >= 19) {
+        if (group.equals(Group.BAD) && random()) {
             fire();
+        }
+
+        if (group.equals(Group.BAD)) {
+            randomDir();
+        }
+    }
+
+    private void randomDir() {
+        if(random()) {
+            dir = Dir.values()[random.nextInt(4)];
         }
     }
 
@@ -126,5 +136,9 @@ public class Tank {
     public void die() {
         living = false;
         tf.explodes.add(new Explode(x, y, tf));
+    }
+
+    public boolean random(){
+        return random.nextInt(100) >= 95;
     }
 }
