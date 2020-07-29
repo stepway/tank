@@ -111,7 +111,7 @@ public class Tank {
                 break;
         }
 
-        if (random.nextInt(10) > 8) {
+        if (group.equals(Group.BAD) && random.nextInt(20) >= 19) {
             fire();
         }
     }
