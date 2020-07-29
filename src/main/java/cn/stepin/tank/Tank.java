@@ -13,8 +13,8 @@ public class Tank {
     private Dir dir = Dir.UP;
 
     private static final int SPEED = 2;
-    public static final int WIDTH = ResourceMgr.tankD.getWidth();
-    public static final int HEIGHT = ResourceMgr.tankD.getHeight();
+    public static final int WIDTH = ResourceMgr.badTankD.getWidth();
+    public static final int HEIGHT = ResourceMgr.badTankD.getHeight();
 
     private boolean moving = false;
     private TankFrame tf = null;
@@ -72,19 +72,19 @@ public class Tank {
             return;
         }
 
-        BufferedImage tankImage = ResourceMgr.tankU;
+        BufferedImage tankImage = ResourceMgr.badTankU;
         switch (dir) {
             case UP:
-                tankImage = ResourceMgr.tankU;
+                tankImage = group.equals(Group.GOOD) ? ResourceMgr.goodTankU : ResourceMgr.badTankU;
                 break;
             case DOWN:
-                tankImage = ResourceMgr.tankD;
+                tankImage = group.equals(Group.GOOD) ? ResourceMgr.goodTankD : ResourceMgr.badTankD;
                 break;
             case LEFT:
-                tankImage = ResourceMgr.tankL;
+                tankImage = group.equals(Group.GOOD) ? ResourceMgr.goodTankL : ResourceMgr.badTankL;
                 break;
             case RIGHT:
-                tankImage = ResourceMgr.tankR;
+                tankImage = group.equals(Group.GOOD) ? ResourceMgr.goodTankR : ResourceMgr.badTankR;
                 break;
         }
         g.drawImage(tankImage, x, y, null);
