@@ -9,8 +9,8 @@ import java.awt.image.BufferedImage;
  * Created by stepway on 2020/7/28.
  */
 public class Explode {
-    public static final int WIDTH = ResourceMgr.explodes[0].getWidth();
-    public static final int HEIGHT = ResourceMgr.explodes[0].getHeight();
+    public static final int WIDTH = ResourceMgr.getInstance().explodes[0].getWidth();
+    public static final int HEIGHT = ResourceMgr.getInstance().explodes[0].getHeight();
     private final TankFrame tf;
 
     private boolean living = true;
@@ -37,8 +37,8 @@ public class Explode {
             return;
         }
 
-        g.drawImage(ResourceMgr.explodes[step++], x, y, null);
-        if (step >= ResourceMgr.explodes.length) {
+        g.drawImage(ResourceMgr.getInstance().explodes[step++], x, y, null);
+        if (step >= ResourceMgr.getInstance().explodes.length) {
             step = 0;
             die();
         }

@@ -14,6 +14,10 @@ public class PropertyMgr {
     public static final String GAME_WIDTH = "gameWidth";
     public static final String GAME_HEIGHT = "gameHeight";
 
+    private PropertyMgr(){
+
+    }
+
     static {
         try {
             props.load(PropertyMgr.class.getClassLoader().getResourceAsStream("config.properties"));

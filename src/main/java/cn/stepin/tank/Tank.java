@@ -13,8 +13,8 @@ public class Tank {
     private Dir dir = Dir.UP;
 
     private static final int SPEED = PropertyMgr.getInt(PropertyMgr.TANK_SPEED);
-    public static final int WIDTH = ResourceMgr.badTankD.getWidth();
-    public static final int HEIGHT = ResourceMgr.badTankD.getHeight();
+    public static final int WIDTH = ResourceMgr.getInstance().badTankD.getWidth();
+    public static final int HEIGHT = ResourceMgr.getInstance().badTankD.getHeight();
 
     Rectangle rect = new Rectangle();
 
@@ -79,19 +79,19 @@ public class Tank {
             return;
         }
 
-        BufferedImage tankImage = ResourceMgr.badTankU;
+        BufferedImage tankImage = ResourceMgr.getInstance().badTankU;
         switch (dir) {
             case UP:
-                tankImage = group.equals(Group.GOOD) ? ResourceMgr.goodTankU : ResourceMgr.badTankU;
+                tankImage = group.equals(Group.GOOD) ? ResourceMgr.getInstance().goodTankU : ResourceMgr.getInstance().badTankU;
                 break;
             case DOWN:
-                tankImage = group.equals(Group.GOOD) ? ResourceMgr.goodTankD : ResourceMgr.badTankD;
+                tankImage = group.equals(Group.GOOD) ? ResourceMgr.getInstance().goodTankD : ResourceMgr.getInstance().badTankD;
                 break;
             case LEFT:
-                tankImage = group.equals(Group.GOOD) ? ResourceMgr.goodTankL : ResourceMgr.badTankL;
+                tankImage = group.equals(Group.GOOD) ? ResourceMgr.getInstance().goodTankL : ResourceMgr.getInstance().badTankL;
                 break;
             case RIGHT:
-                tankImage = group.equals(Group.GOOD) ? ResourceMgr.goodTankR : ResourceMgr.badTankR;
+                tankImage = group.equals(Group.GOOD) ? ResourceMgr.getInstance().goodTankR : ResourceMgr.getInstance().badTankR;
                 break;
         }
         g.drawImage(tankImage, x, y, null);

@@ -7,9 +7,9 @@ import java.awt.image.BufferedImage;
  * Created by stepway on 2020/7/28.
  */
 public class Bullet {
-    public static final int SPEED = PropertyMgr.getInt(PropertyMgr.BULLET_SPEED);;
-    public static final int WIDTH = ResourceMgr.bulletD.getWidth();
-    public static final int HEIGHT = ResourceMgr.bulletD.getHeight();
+    public static final int SPEED = PropertyMgr.getInt(PropertyMgr.BULLET_SPEED);
+    public static final int WIDTH = ResourceMgr.getInstance().bulletD.getWidth();
+    public static final int HEIGHT = ResourceMgr.getInstance().bulletD.getHeight();
 
     Rectangle rect = new Rectangle();
 
@@ -46,19 +46,19 @@ public class Bullet {
         if(!living){
             return;
         }
-        BufferedImage bulletImage = ResourceMgr.bulletU;
+        BufferedImage bulletImage = ResourceMgr.getInstance().bulletU;
         switch (dir) {
             case UP:
-                bulletImage = ResourceMgr.bulletU;
+                bulletImage = ResourceMgr.getInstance().bulletU;
                 break;
             case DOWN:
-                bulletImage = ResourceMgr.bulletD;
+                bulletImage = ResourceMgr.getInstance().bulletD;
                 break;
             case LEFT:
-                bulletImage = ResourceMgr.bulletL;
+                bulletImage = ResourceMgr.getInstance().bulletL;
                 break;
             case RIGHT:
-                bulletImage = ResourceMgr.bulletR;
+                bulletImage = ResourceMgr.getInstance().bulletR;
                 break;
         }
         g.drawImage(bulletImage, x, y, null);

@@ -8,13 +8,19 @@ import java.io.IOException;
  * Created by stepway on 2020/7/29.
  */
 public class ResourceMgr {
-    public static BufferedImage goodTankL, goodTankR, goodTankU, goodTankD;
-    public static BufferedImage badTankL, badTankR, badTankU, badTankD;
-    public static BufferedImage bulletL, bulletR, bulletU, bulletD;
+    private static class ResourceMgrHolder{
+        private final static ResourceMgr INSTANCE = new ResourceMgr();
+    }
+    public BufferedImage goodTankL, goodTankR, goodTankU, goodTankD;
+    public BufferedImage badTankL, badTankR, badTankU, badTankD;
+    public BufferedImage bulletL, bulletR, bulletU, bulletD;
 
-    public static BufferedImage[] explodes = new BufferedImage[16];
+    public BufferedImage[] explodes = new BufferedImage[16];
 
-    static {
+    private ResourceMgr(){
+        load();
+    }
+    private void load() {
         try {
             badTankU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/BadTank1.png"));
             badTankL = ImageUtil.rotateImage(badTankU, -90);
@@ -42,4 +48,7 @@ public class ResourceMgr {
         }
     }
 
+    public static ResourceMgr getInstance(){
+        return ResourceMgrHolder.INSTANCE;
+    }
 }
