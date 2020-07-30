@@ -9,6 +9,10 @@ import java.util.Properties;
 public class PropertyMgr {
     static Properties props = new Properties();
     public static final String INIT_TANK_COUNT = "initTankCount";
+    public static final String TANK_SPEED = "tankSpeed";
+    public static final String BULLET_SPEED = "bulletSpeed";
+    public static final String GAME_WIDTH = "gameWidth";
+    public static final String GAME_HEIGHT = "gameHeight";
 
     static {
         try {
@@ -20,5 +24,13 @@ public class PropertyMgr {
 
     public static Object get(String key) {
         return props.get(key);
+    }
+
+    public static int getInt(String key) {
+        return Integer.parseInt(props.getProperty(key));
+    }
+
+    public static String getString(String key) {
+        return props.getProperty(key);
     }
 }

@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
  * Created by stepway on 2020/7/28.
  */
 public class Bullet {
-    public static final int SPEED = 10;
+    public static final int SPEED = PropertyMgr.getInt(PropertyMgr.BULLET_SPEED);;
     public static final int WIDTH = ResourceMgr.bulletD.getWidth();
     public static final int HEIGHT = ResourceMgr.bulletD.getHeight();
 

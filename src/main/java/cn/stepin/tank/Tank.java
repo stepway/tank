@@ -12,7 +12,7 @@ public class Tank {
     private int x, y;
     private Dir dir = Dir.UP;
 
-    private static final int SPEED = 5;
+    private static final int SPEED = PropertyMgr.getInt(PropertyMgr.TANK_SPEED);
     public static final int WIDTH = ResourceMgr.badTankD.getWidth();
     public static final int HEIGHT = ResourceMgr.badTankD.getHeight();
 
