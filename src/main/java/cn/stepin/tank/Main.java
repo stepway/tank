@@ -7,9 +7,10 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         TankFrame tf = new TankFrame();
 
-        int tankSize = 5;
+        int initTankCount = Integer.parseInt((String) PropertyMgr.get(PropertyMgr.INIT_TANK_COUNT));
+
         //初始化敌方坦克
-        for (int i = 0; i < tankSize; i++) {
+        for (int i = 0; i < initTankCount; i++) {
             Tank tank = new Tank(50 + 150 * i, 100, Dir.DOWN, tf, Group.BAD);
             tank.setMoving(true);
             tf.tanks.add(tank);
