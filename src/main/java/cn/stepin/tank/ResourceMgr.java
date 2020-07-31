@@ -3,6 +3,8 @@ package cn.stepin.tank;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * Created by stepway on 2020/7/29.
@@ -16,6 +18,10 @@ public class ResourceMgr {
     public BufferedImage bulletL, bulletR, bulletU, bulletD;
 
     public BufferedImage[] explodes = new BufferedImage[16];
+
+    public FireStrategy goodFs;
+
+    public FireStrategy badFs;
 
     private ResourceMgr(){
         load();
@@ -43,7 +49,21 @@ public class ResourceMgr {
                 explodes[i] = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/e" + (i + 1) + ".gif"));
             }
 
+            Method method = Class.forName(PropertyMgr.getString("goodFs")).getMethod("getInstance", null);
+            goodFs = (FireStrategy) method.invoke(null);
+
+            method = Class.forName(PropertyMgr.getString("badFs")).getMethod("getInstance", null);
+            badFs = (FireStrategy) method.invoke(null);
+
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
     }

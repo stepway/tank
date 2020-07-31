@@ -147,7 +147,7 @@ public class TankFrame extends Frame {
                     bD = false;
                     break;
                 case KeyEvent.VK_SPACE:
-                    myTank.fire();
+                    myTank.fire(ResourceMgr.getInstance().goodFs);
                     break;
             }
             setMainTankDir();

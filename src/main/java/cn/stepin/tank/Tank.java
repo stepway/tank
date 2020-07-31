@@ -9,8 +9,8 @@ import java.util.Random;
  * Created by stepway on 2020/7/28.
  */
 public class Tank {
-    private int x, y;
-    private Dir dir = Dir.UP;
+    int x, y;
+    Dir dir = Dir.UP;
 
     private static final int SPEED = PropertyMgr.getInt(PropertyMgr.TANK_SPEED);
     public static final int WIDTH = ResourceMgr.getInstance().badTankD.getWidth();
@@ -19,9 +19,10 @@ public class Tank {
     Rectangle rect = new Rectangle();
 
     private boolean moving = false;
-    private TankFrame tf = null;
+    TankFrame tf = null;
     private boolean living = true;
-    private Group group = Group.BAD;
+
+    Group group = Group.BAD;
 
     private Random random = new Random();
 
@@ -125,7 +126,7 @@ public class Tank {
         rect.y = y;
 
         if (group.equals(Group.BAD) && random()) {
-            fire();
+            fire(ResourceMgr.getInstance().badFs);
         }
 
         if (group.equals(Group.BAD)) {
@@ -154,11 +155,10 @@ public class Tank {
         }
     }
 
-    public void fire() {
-        tf.bullets.add(new Bullet(
-                x + (Tank.WIDTH - Bullet.WIDTH) / 2,
-                y + (Tank.HEIGHT - Bullet.HEIGHT) / 2,
-                dir, tf, group));
+    public void fire(FireStrategy fireStrategy) {
+        if (null != fireStrategy) {
+            fireStrategy.fire(this);
+        }
     }
 
     public void die() {
