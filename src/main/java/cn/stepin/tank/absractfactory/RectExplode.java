@@ -1,15 +1,15 @@
-package cn.stepin.tank;
+package cn.stepin.tank.absractfactory;
 
-import cn.stepin.tank.absractfactory.BaseExplode;
-import com.sun.org.apache.regexp.internal.RE;
+import cn.stepin.tank.Audio;
+import cn.stepin.tank.ResourceMgr;
+import cn.stepin.tank.TankFrame;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 /**
- * Created by stepway on 2020/7/28.
+ * Created by stepway on 2020/8/1.
  */
-public class Explode extends BaseExplode{
+public class RectExplode extends BaseExplode {
     public static final int WIDTH = ResourceMgr.getInstance().explodes[0].getWidth();
     public static final int HEIGHT = ResourceMgr.getInstance().explodes[0].getHeight();
     private final TankFrame tf;
@@ -19,7 +19,7 @@ public class Explode extends BaseExplode{
     private int x, y;
     private int step = 0;
 
-    public Explode(int x, int y, TankFrame tf) {
+    public RectExplode(int x, int y, TankFrame tf) {
         this.x = x;
         this.y = y;
         this.tf = tf;
@@ -28,20 +28,21 @@ public class Explode extends BaseExplode{
         }).start();
     }
 
-    @Override
     public boolean isLiving() {
         return living;
     }
 
 
-    @Override
     public void paint(Graphics g) {
         if (!living) {
             return;
         }
 
-        g.drawImage(ResourceMgr.getInstance().explodes[step++], x, y, null);
-        if (step >= ResourceMgr.getInstance().explodes.length) {
+        Color c = g.getColor();
+        g.setColor(Color.RED);
+        g.fillRect(x, y, 10 * step, 10 * step);
+        step++;
+        if (step >= 8) {
             step = 0;
             die();
         }

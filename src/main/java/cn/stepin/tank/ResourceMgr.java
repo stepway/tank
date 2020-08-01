@@ -1,5 +1,7 @@
 package cn.stepin.tank;
 
+import cn.stepin.tank.absractfactory.GameFactory;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -22,6 +24,8 @@ public class ResourceMgr {
     public FireStrategy goodFs;
 
     public FireStrategy badFs;
+
+    public GameFactory gameFactory;
 
     private ResourceMgr(){
         load();
@@ -54,6 +58,9 @@ public class ResourceMgr {
 
             method = Class.forName(PropertyMgr.getString("badFs")).getMethod("getInstance", null);
             badFs = (FireStrategy) method.invoke(null);
+
+            method = Class.forName(PropertyMgr.getString(PropertyMgr.GAME_FACTORY)).getMethod("getInstance", null);
+            gameFactory = (GameFactory) method.invoke(null);
 
         } catch (IOException e) {
             e.printStackTrace();

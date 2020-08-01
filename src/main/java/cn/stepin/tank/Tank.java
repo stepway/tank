@@ -1,5 +1,7 @@
 package cn.stepin.tank;
 
+import cn.stepin.tank.absractfactory.BaseTank;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
@@ -8,7 +10,7 @@ import java.util.Random;
 /**
  * Created by stepway on 2020/7/28.
  */
-public class Tank {
+public class Tank extends BaseTank {
     int x, y;
     Dir dir = Dir.UP;
 
@@ -59,6 +61,7 @@ public class Tank {
         return dir;
     }
 
+    @Override
     public boolean isLiving() {
         return living;
     }
@@ -67,14 +70,22 @@ public class Tank {
         return group;
     }
 
+    @Override
+    public Rectangle getRect() {
+        return rect;
+    }
+
+    @Override
     public void setMoving(boolean moving) {
         this.moving = moving;
     }
 
+    @Override
     public void setDir(Dir dir) {
         this.dir = dir;
     }
 
+    @Override
     public void paint(Graphics g) {
         if (!living) {
             return;
@@ -155,15 +166,17 @@ public class Tank {
         }
     }
 
+    @Override
     public void fire(FireStrategy fireStrategy) {
         if (null != fireStrategy) {
             fireStrategy.fire(this);
         }
     }
 
+    @Override
     public void die() {
         living = false;
-        tf.explodes.add(new Explode(x, y, tf));
+        tf.explodes.add(ResourceMgr.getInstance().gameFactory.createExplode(x, y, tf));
     }
 
     public boolean random() {

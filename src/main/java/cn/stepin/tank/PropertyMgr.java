@@ -13,6 +13,7 @@ public class PropertyMgr {
     public static final String BULLET_SPEED = "bulletSpeed";
     public static final String GAME_WIDTH = "gameWidth";
     public static final String GAME_HEIGHT = "gameHeight";
+    public static final String GAME_FACTORY = "gameFactory";
 
     private PropertyMgr(){
 

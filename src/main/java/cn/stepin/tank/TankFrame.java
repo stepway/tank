@@ -1,5 +1,9 @@
 package cn.stepin.tank;
 
+import cn.stepin.tank.absractfactory.BaseBullet;
+import cn.stepin.tank.absractfactory.BaseExplode;
+import cn.stepin.tank.absractfactory.BaseTank;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -14,10 +18,10 @@ import java.awt.event.WindowEvent;
  * Created by stepway on 2020/7/28.
  */
 public class TankFrame extends Frame {
-    Tank myTank = new Tank(400, 500, Dir.UP, this, Group.GOOD);
-    List<Bullet> bullets = new ArrayList<>();
-    List<Tank> tanks = new ArrayList<>();
-    List<Explode> explodes = new ArrayList<>();
+    BaseTank myTank = ResourceMgr.getInstance().gameFactory.createTank(400, 500, Dir.UP, this, Group.GOOD);
+    List<BaseBullet> bullets = new ArrayList<>();
+    List<BaseTank> tanks = new ArrayList<>();
+    List<BaseExplode> explodes = new ArrayList<>();
 
     static final int GAME_WIDTH = PropertyMgr.getInt(PropertyMgr.GAME_WIDTH);
     static final int GAME_HEIGHT = PropertyMgr.getInt(PropertyMgr.GAME_HEIGHT);
@@ -27,7 +31,7 @@ public class TankFrame extends Frame {
     public TankFrame() {
         setSize(GAME_WIDTH, GAME_HEIGHT);
         setResizable(false);
-        setTitle("tank war");
+        setTitle("tank_ war");
         setVisible(true);
         addKeyListener(new MyKeyListener());
         addWindowListener(new WindowAdapter() {
@@ -75,8 +79,8 @@ public class TankFrame extends Frame {
             }
         }
 
-        for(Iterator<Bullet> it = bullets.iterator(); it.hasNext();) {
-            Bullet bullet = it.next();
+        for(Iterator<BaseBullet> it = bullets.iterator(); it.hasNext();) {
+            BaseBullet bullet = it.next();
             if(bullet.isLiving()){
                 bullet.paint(g);
             }else{
@@ -84,8 +88,8 @@ public class TankFrame extends Frame {
             }
         }
 
-        for(Iterator<Tank> it = tanks.iterator(); it.hasNext();) {
-            Tank tank = it.next();
+        for(Iterator<BaseTank> it = tanks.iterator(); it.hasNext();) {
+            BaseTank tank = it.next();
             if(tank.isLiving()){
                 tank.paint(g);
             }else{
@@ -93,8 +97,8 @@ public class TankFrame extends Frame {
             }
         }
 
-        for(Iterator<Explode> it = explodes.iterator(); it.hasNext();) {
-            Explode explode = it.next();
+        for(Iterator<BaseExplode> it = explodes.iterator(); it.hasNext();) {
+            BaseExplode explode = it.next();
             if(explode.isLiving()){
                 explode.paint(g);
             }else{

@@ -1,12 +1,15 @@
 package cn.stepin.tank;
 
+import cn.stepin.tank.absractfactory.BaseBullet;
+import cn.stepin.tank.absractfactory.BaseTank;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
  * Created by stepway on 2020/7/28.
  */
-public class Bullet {
+public class Bullet extends BaseBullet{
     public static final int SPEED = PropertyMgr.getInt(PropertyMgr.BULLET_SPEED);
     public static final int WIDTH = ResourceMgr.getInstance().bulletD.getWidth();
     public static final int HEIGHT = ResourceMgr.getInstance().bulletD.getHeight();
@@ -36,6 +39,7 @@ public class Bullet {
         tf.bullets.add(this);
     }
 
+    @Override
     public boolean isLiving() {
         return living;
     }
@@ -44,6 +48,7 @@ public class Bullet {
         return group;
     }
 
+    @Override
     public void paint(Graphics g) {
         if(!living){
             return;
@@ -67,7 +72,8 @@ public class Bullet {
         move();
     }
 
-    private void move() {
+    @Override
+    public void move() {
         switch (dir) {
             case LEFT:
                 x -= SPEED;
@@ -92,20 +98,22 @@ public class Bullet {
         }
     }
 
-    public void collideWidth(Tank tank) {
+    @Override
+    public void collideWidth(BaseTank tank) {
         if(group.equals(tank.getGroup())){
             return;
         }
 
         Rectangle rect1 = rect;
-        Rectangle rect2 = tank.rect;
+        Rectangle rect2 = tank.getRect();
         if (rect1.intersects(rect2)) {
             tank.die();
             die();
         }
     }
 
-    private void die() {
+    @Override
+    public void die() {
         living = false;
     }
 }
