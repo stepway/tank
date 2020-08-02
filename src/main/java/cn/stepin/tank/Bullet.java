@@ -13,7 +13,7 @@ public class Bullet {
 
     Rectangle rect = new Rectangle();
 
-    private final TankFrame tf;
+    private final GameModel gm;
     private Group group;
 
     private boolean living = true;
@@ -21,11 +21,11 @@ public class Bullet {
     private int x,y;
     private Dir dir;
 
-    public Bullet(int x, int y, Dir dir, TankFrame tf, Group group) {
+    public Bullet(int x, int y, Dir dir, GameModel gm, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.tf = tf;
+        this.gm = gm;
         this.group = group;
 
         rect.x = x;
@@ -33,7 +33,7 @@ public class Bullet {
         rect.width = WIDTH;
         rect.height = HEIGHT;
 
-        tf.bullets.add(this);
+        this.gm.bullets.add(this);
     }
 
     public boolean isLiving() {

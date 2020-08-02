@@ -19,18 +19,18 @@ public class Tank {
     Rectangle rect = new Rectangle();
 
     private boolean moving = false;
-    TankFrame tf = null;
+    GameModel gm = null;
     private boolean living = true;
 
     Group group = Group.BAD;
 
     private Random random = new Random();
 
-    public Tank(int x, int y, Dir dir, TankFrame tf, Group group) {
+    public Tank(int x, int y, Dir dir, GameModel tf, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.tf = tf;
+        this.gm = tf;
         this.group = group;
 
         rect.x = x;
@@ -163,7 +163,7 @@ public class Tank {
 
     public void die() {
         living = false;
-        tf.explodes.add(new Explode(x, y, tf));
+        gm.explodes.add(new Explode(x, y));
     }
 
     public boolean random() {

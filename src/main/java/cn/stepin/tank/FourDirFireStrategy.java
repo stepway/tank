@@ -24,7 +24,7 @@ public class FourDirFireStrategy implements FireStrategy {
             new Bullet(
                     bX,
                     bY,
-                    dir, tank.tf, tank.group);
+                    dir, tank.gm, tank.group);
         }
 
         if (tank.group == Group.GOOD) {

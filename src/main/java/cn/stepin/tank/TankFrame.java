@@ -14,10 +14,7 @@ import java.awt.event.WindowEvent;
  * Created by stepway on 2020/7/28.
  */
 public class TankFrame extends Frame {
-    Tank myTank = new Tank(400, 500, Dir.UP, this, Group.GOOD);
-    List<Bullet> bullets = new ArrayList<>();
-    List<Tank> tanks = new ArrayList<>();
-    List<Explode> explodes = new ArrayList<>();
+    GameModel gm = new GameModel();
 
     static final int GAME_WIDTH = PropertyMgr.getInt(PropertyMgr.GAME_WIDTH);
     static final int GAME_HEIGHT = PropertyMgr.getInt(PropertyMgr.GAME_HEIGHT);
@@ -54,53 +51,7 @@ public class TankFrame extends Frame {
 
     @Override
     public void paint(Graphics g) {
-        Color c = g.getColor();
-        g.setColor(Color.WHITE);
-        g.drawString("子弹的数量：" + bullets.size(), 10, 40);
-        g.drawString("敌人的数量：" + tanks.size(), 10, 60);
-        g.drawString("爆炸的数量：" + explodes.size(), 10, 80);
-        g.setColor(c);
-
-
-        if (myTank.isLiving()) {
-            myTank.paint(g);
-        }
-
-        for (int i = 0; i < bullets.size(); i++) {
-            for (int j = 0; j < tanks.size(); j++) {
-                bullets.get(i).collideWidth(tanks.get(j));
-            }
-            if(myTank.isLiving()) {
-                bullets.get(i).collideWidth(myTank);
-            }
-        }
-
-        for(Iterator<Bullet> it = bullets.iterator(); it.hasNext();) {
-            Bullet bullet = it.next();
-            if(bullet.isLiving()){
-                bullet.paint(g);
-            }else{
-                it.remove();
-            }
-        }
-
-        for(Iterator<Tank> it = tanks.iterator(); it.hasNext();) {
-            Tank tank = it.next();
-            if(tank.isLiving()){
-                tank.paint(g);
-            }else{
-                it.remove();
-            }
-        }
-
-        for(Iterator<Explode> it = explodes.iterator(); it.hasNext();) {
-            Explode explode = it.next();
-            if(explode.isLiving()){
-                explode.paint(g);
-            }else{
-                it.remove();
-            }
-        }
+        gm.paint(g);
     }
 
     class MyKeyListener extends KeyAdapter {
@@ -147,7 +98,7 @@ public class TankFrame extends Frame {
                     bD = false;
                     break;
                 case KeyEvent.VK_SPACE:
-                    myTank.fire(ResourceMgr.getInstance().goodFs);
+                    gm.getMainTank().fire(ResourceMgr.getInstance().goodFs);
                     break;
             }
             setMainTankDir();
@@ -155,22 +106,22 @@ public class TankFrame extends Frame {
 
         private void setMainTankDir() {
             if (bL) {
-                myTank.setDir(Dir.LEFT);
+                gm.getMainTank().setDir(Dir.LEFT);
             }
             if (bR) {
-                myTank.setDir(Dir.RIGHT);
+                gm.getMainTank().setDir(Dir.RIGHT);
             }
             if (bU) {
-                myTank.setDir(Dir.UP);
+                gm.getMainTank().setDir(Dir.UP);
             }
             if (bD) {
-                myTank.setDir(Dir.DOWN);
+                gm.getMainTank().setDir(Dir.DOWN);
             }
 
             if(!bL && !bR && !bU && !bD){
-                myTank.setMoving(false);
+                gm.getMainTank().setMoving(false);
             }else{
-                myTank.setMoving(true);
+                gm.getMainTank().setMoving(true);
             }
         }
     }
