@@ -22,7 +22,7 @@ public class GameModel {
 
         //初始化敌方坦克
         for (int i = 0; i < initTankCount; i++) {
-            Tank tank = new Tank(50 + 75 * i, 100, Dir.DOWN, this, Group.BAD);
+            Tank tank = new Tank(50 + 75 * (i % 10), 100 + 75 * (i / 10), Dir.DOWN, this, Group.BAD);
             tank.setMoving(true);
             add(tank);
         }
@@ -54,7 +54,7 @@ public class GameModel {
         }
 
         for (int i = 0; i < gameObjects.size(); i++) {
-            for (int j=i+1; j < gameObjects.size(); j++) {
+            for (int j = i + 1; j < gameObjects.size(); j++) {
                 collider.collide(gameObjects.get(i), gameObjects.get(j));
                 collider2.collide(gameObjects.get(i), gameObjects.get(j));
             }
