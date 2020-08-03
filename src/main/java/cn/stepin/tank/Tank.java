@@ -1,5 +1,7 @@
 package cn.stepin.tank;
 
+import cn.stepin.tank.strategy.FireStrategy;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
@@ -9,7 +11,7 @@ import java.util.Random;
  * Created by stepway on 2020/7/28.
  */
 public class Tank extends GameObject {
-    Dir dir = Dir.UP;
+    public Dir dir = Dir.UP;
 
     private static final int SPEED = PropertyMgr.getInt(PropertyMgr.TANK_SPEED);
     public static final int WIDTH = ResourceMgr.getInstance().badTankD.getWidth();
@@ -18,10 +20,10 @@ public class Tank extends GameObject {
     Rectangle rect = new Rectangle();
 
     private boolean moving = false;
-    GameModel gm = null;
+    public GameModel gm = null;
     private boolean living = true;
 
-    Group group = Group.BAD;
+    public Group group = Group.BAD;
 
     private Random random = new Random();
 

@@ -1,5 +1,7 @@
 package cn.stepin.tank;
 
+import cn.stepin.tank.strategy.FireStrategy;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;

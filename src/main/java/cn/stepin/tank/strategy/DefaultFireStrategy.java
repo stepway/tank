@@ -1,4 +1,9 @@
-package cn.stepin.tank;
+package cn.stepin.tank.strategy;
+
+import cn.stepin.tank.Audio;
+import cn.stepin.tank.Bullet;
+import cn.stepin.tank.Group;
+import cn.stepin.tank.Tank;
 
 /**
  * Created by stepway on 2020/7/31.
