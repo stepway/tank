@@ -1,9 +1,10 @@
 package cn.stepin.tank;
 
-import java.awt.Graphics;
-import java.awt.Color;
+import cn.stepin.tank.cor.BulletTankCollider;
+import cn.stepin.tank.cor.Collider;
+
+import java.awt.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -11,9 +12,8 @@ import java.util.List;
  */
 public class GameModel {
     Tank myTank = new Tank(400, 500, Dir.UP, this, Group.GOOD);
-    List<Bullet> bullets = new ArrayList<>();
-    List<Tank> tanks = new ArrayList<>();
-    List<Explode> explodes = new ArrayList<>();
+    List<GameObject> gameObjects = new ArrayList<>();
+    Collider collider = new BulletTankCollider();
 
     public GameModel() {
         int initTankCount = Integer.parseInt((String) PropertyMgr.get(PropertyMgr.INIT_TANK_COUNT));
@@ -22,16 +22,24 @@ public class GameModel {
         for (int i = 0; i < initTankCount; i++) {
             Tank tank = new Tank(50 + 150 * i, 100, Dir.DOWN, this, Group.BAD);
             tank.setMoving(true);
-            tanks.add(tank);
+            add(tank);
         }
+    }
+
+    public void add(GameObject gameObject) {
+        gameObjects.add(gameObject);
+    }
+
+    public void remove(GameObject gameObject) {
+        gameObjects.remove(gameObject);
     }
 
     public void paint(Graphics g) {
         Color c = g.getColor();
         g.setColor(Color.WHITE);
-        g.drawString("子弹的数量：" + bullets.size(), 10, 40);
-        g.drawString("敌人的数量：" + tanks.size(), 10, 60);
-        g.drawString("爆炸的数量：" + explodes.size(), 10, 80);
+//        g.drawString("子弹的数量：" + bullets.size(), 10, 40);
+//        g.drawString("敌人的数量：" + tanks.size(), 10, 60);
+//        g.drawString("爆炸的数量：" + explodes.size(), 10, 80);
         g.setColor(c);
 
 
@@ -39,41 +47,16 @@ public class GameModel {
             myTank.paint(g);
         }
 
-        for (int i = 0; i < bullets.size(); i++) {
-            for (int j = 0; j < tanks.size(); j++) {
-                bullets.get(i).collideWidth(tanks.get(j));
-            }
-            if(myTank.isLiving()) {
-                bullets.get(i).collideWidth(myTank);
+        for (int i = 0; i < gameObjects.size(); i++) {
+            gameObjects.get(i).paint(g);
+        }
+
+        for (int i = 0; i < gameObjects.size(); i++) {
+            for (int j=i+1; j < gameObjects.size(); j++) {
+                collider.collide(gameObjects.get(i), gameObjects.get(j));
             }
         }
 
-        for(Iterator<Bullet> it = bullets.iterator(); it.hasNext();) {
-            Bullet bullet = it.next();
-            if(bullet.isLiving()){
-                bullet.paint(g);
-            }else{
-                it.remove();
-            }
-        }
-
-        for(Iterator<Tank> it = tanks.iterator(); it.hasNext();) {
-            Tank tank = it.next();
-            if(tank.isLiving()){
-                tank.paint(g);
-            }else{
-                it.remove();
-            }
-        }
-
-        for(Iterator<Explode> it = explodes.iterator(); it.hasNext();) {
-            Explode explode = it.next();
-            if(explode.isLiving()){
-                explode.paint(g);
-            }else{
-                it.remove();
-            }
-        }
     }
 
     public Tank getMainTank() {

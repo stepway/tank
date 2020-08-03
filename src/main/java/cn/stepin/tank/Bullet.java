@@ -11,7 +11,7 @@ public class Bullet extends GameObject{
     public static final int WIDTH = ResourceMgr.getInstance().bulletD.getWidth();
     public static final int HEIGHT = ResourceMgr.getInstance().bulletD.getHeight();
 
-    Rectangle rect = new Rectangle();
+    public Rectangle rect = new Rectangle();
 
     private final GameModel gm;
     private Group group;
@@ -32,7 +32,7 @@ public class Bullet extends GameObject{
         rect.width = WIDTH;
         rect.height = HEIGHT;
 
-        this.gm.bullets.add(this);
+        this.gm.add(this);
     }
 
     public boolean isLiving() {
@@ -105,7 +105,8 @@ public class Bullet extends GameObject{
         }
     }
 
-    private void die() {
+    public void die() {
         living = false;
+        gm.remove(this);
     }
 }

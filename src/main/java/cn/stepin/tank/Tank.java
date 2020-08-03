@@ -17,7 +17,7 @@ public class Tank extends GameObject {
     public static final int WIDTH = ResourceMgr.getInstance().badTankD.getWidth();
     public static final int HEIGHT = ResourceMgr.getInstance().badTankD.getHeight();
 
-    Rectangle rect = new Rectangle();
+    public Rectangle rect = new Rectangle();
 
     private boolean moving = false;
     public GameModel gm = null;
@@ -149,7 +149,8 @@ public class Tank extends GameObject {
 
     public void die() {
         living = false;
-        gm.explodes.add(new Explode(x, y));
+        gm.remove(this);
+        gm.add(new Explode(x, y, gm));
     }
 
     public boolean random() {
