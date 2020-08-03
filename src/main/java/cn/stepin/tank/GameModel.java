@@ -2,6 +2,7 @@ package cn.stepin.tank;
 
 import cn.stepin.tank.cor.BulletTankCollider;
 import cn.stepin.tank.cor.Collider;
+import cn.stepin.tank.cor.TankTankCollider;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -14,13 +15,14 @@ public class GameModel {
     Tank myTank = new Tank(400, 500, Dir.UP, this, Group.GOOD);
     List<GameObject> gameObjects = new ArrayList<>();
     Collider collider = new BulletTankCollider();
+    Collider collider2 = new TankTankCollider();
 
     public GameModel() {
         int initTankCount = Integer.parseInt((String) PropertyMgr.get(PropertyMgr.INIT_TANK_COUNT));
 
         //初始化敌方坦克
         for (int i = 0; i < initTankCount; i++) {
-            Tank tank = new Tank(50 + 150 * i, 100, Dir.DOWN, this, Group.BAD);
+            Tank tank = new Tank(50 + 75 * i, 100, Dir.DOWN, this, Group.BAD);
             tank.setMoving(true);
             add(tank);
         }
@@ -54,6 +56,7 @@ public class GameModel {
         for (int i = 0; i < gameObjects.size(); i++) {
             for (int j=i+1; j < gameObjects.size(); j++) {
                 collider.collide(gameObjects.get(i), gameObjects.get(j));
+                collider2.collide(gameObjects.get(i), gameObjects.get(j));
             }
         }
 

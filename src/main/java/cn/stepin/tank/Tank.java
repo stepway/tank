@@ -156,4 +156,23 @@ public class Tank extends GameObject {
     public boolean random() {
         return random.nextInt(100) >= 95;
     }
+
+    public void back() {
+        switch (dir) {
+            case LEFT:
+                x += SPEED;
+                break;
+            case RIGHT:
+                x -= SPEED;
+                break;
+            case UP:
+                y += SPEED;
+                break;
+            case DOWN:
+                y -= SPEED;
+                break;
+        }
+        rect.x = x;
+        rect.y = y;
+    }
 }
