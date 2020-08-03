@@ -14,7 +14,6 @@ public class BulletTankCollider implements Collider {
     @Override
     public void collide(GameObject o1, GameObject o2) {
         if (o1 instanceof Bullet && o2 instanceof Tank) {
-            ((Bullet) o1).collideWidth((Tank) o2);
             Bullet bullet = (Bullet)o1;
             Tank tank = (Tank) o2;
 

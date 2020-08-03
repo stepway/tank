@@ -92,19 +92,6 @@ public class Bullet extends GameObject{
         }
     }
 
-    public void collideWidth(Tank tank) {
-        if(group.equals(tank.getGroup())){
-            return;
-        }
-
-        Rectangle rect1 = rect;
-        Rectangle rect2 = tank.rect;
-        if (rect1.intersects(rect2)) {
-            tank.die();
-            die();
-        }
-    }
-
     public void die() {
         living = false;
         gm.remove(this);
