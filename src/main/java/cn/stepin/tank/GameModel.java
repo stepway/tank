@@ -1,8 +1,6 @@
 package cn.stepin.tank;
 
-import cn.stepin.tank.cor.BulletTankCollider;
-import cn.stepin.tank.cor.Collider;
-import cn.stepin.tank.cor.TankTankCollider;
+import cn.stepin.tank.cor.ColliderChain;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -14,8 +12,7 @@ import java.util.List;
 public class GameModel {
     Tank myTank = new Tank(400, 500, Dir.UP, this, Group.GOOD);
     List<GameObject> gameObjects = new ArrayList<>();
-    Collider collider = new BulletTankCollider();
-    Collider collider2 = new TankTankCollider();
+    ColliderChain colliderChain = new ColliderChain();
 
     public GameModel() {
         int initTankCount = Integer.parseInt((String) PropertyMgr.get(PropertyMgr.INIT_TANK_COUNT));
@@ -55,8 +52,9 @@ public class GameModel {
 
         for (int i = 0; i < gameObjects.size(); i++) {
             for (int j = i + 1; j < gameObjects.size(); j++) {
-                collider.collide(gameObjects.get(i), gameObjects.get(j));
-                collider2.collide(gameObjects.get(i), gameObjects.get(j));
+                GameObject o1 = gameObjects.get(i);
+                GameObject o2 = gameObjects.get(j);
+                colliderChain.collide(o1, o2);
             }
         }
 
