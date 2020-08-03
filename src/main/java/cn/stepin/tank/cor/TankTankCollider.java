@@ -27,24 +27,8 @@ public class TankTankCollider implements Collider {
             return;
         }
 
-        Dir d1 = t1.getDir();
-        Dir d2 = t2.getDir();
-        if (d1.getReverseDir() == d2) {
-            t1.back();
-            t2.back();
-            t1.setDir(t1.getDir().getReverseDir());
-            t2.setDir(t2.getDir().getReverseDir());
-        } else {
-            Tank t = mostCentralTank(t1, t2);
-            t.back();
-            t.setDir(t.getDir().getReverseDir());
-        }
+        t1.back();
+        t2.back();
 
-    }
-
-    private Tank mostCentralTank(Tank t1, Tank t2) {
-        double distance1 = Math.abs(Math.sqrt(t1.x - TankFrame.WIDTH) + Math.sqrt(t1.y - TankFrame.HEIGHT));
-        double distance2 = Math.abs(Math.sqrt(t2.x - TankFrame.WIDTH) + Math.sqrt(t2.y - TankFrame.HEIGHT));
-        return distance1 > distance2 ? t1 : t2;
     }
 }

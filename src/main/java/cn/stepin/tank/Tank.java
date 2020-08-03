@@ -27,6 +27,8 @@ public class Tank extends GameObject {
 
     private Random random = new Random();
 
+    private int oldX, oldY;
+
     public Tank(int x, int y, Dir dir, GameModel tf, Group group) {
         this.x = x;
         this.y = y;
@@ -90,6 +92,10 @@ public class Tank extends GameObject {
         if (!moving) {
             return;
         }
+
+        oldX = x;
+        oldY = y;
+
         switch (dir) {
             case LEFT:
                 x -= SPEED;
@@ -158,21 +164,7 @@ public class Tank extends GameObject {
     }
 
     public void back() {
-        switch (dir) {
-            case LEFT:
-                x += SPEED;
-                break;
-            case RIGHT:
-                x -= SPEED;
-                break;
-            case UP:
-                y += SPEED;
-                break;
-            case DOWN:
-                y -= SPEED;
-                break;
-        }
-        rect.x = x;
-        rect.y = y;
+        x = oldX;
+        y = oldY;
     }
 }
