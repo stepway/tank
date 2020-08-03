@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 /**
  * Created by stepway on 2020/7/28.
  */
-public class Bullet {
+public class Bullet extends GameObject{
     public static final int SPEED = PropertyMgr.getInt(PropertyMgr.BULLET_SPEED);
     public static final int WIDTH = ResourceMgr.getInstance().bulletD.getWidth();
     public static final int HEIGHT = ResourceMgr.getInstance().bulletD.getHeight();
@@ -18,7 +18,6 @@ public class Bullet {
 
     private boolean living = true;
 
-    private int x,y;
     private Dir dir;
 
     public Bullet(int x, int y, Dir dir, GameModel gm, Group group) {
@@ -44,6 +43,7 @@ public class Bullet {
         return group;
     }
 
+    @Override
     public void paint(Graphics g) {
         if(!living){
             return;

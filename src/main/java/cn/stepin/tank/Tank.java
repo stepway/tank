@@ -8,8 +8,7 @@ import java.util.Random;
 /**
  * Created by stepway on 2020/7/28.
  */
-public class Tank {
-    int x, y;
+public class Tank extends GameObject {
     Dir dir = Dir.UP;
 
     private static final int SPEED = PropertyMgr.getInt(PropertyMgr.TANK_SPEED);
@@ -39,22 +38,6 @@ public class Tank {
         rect.height = HEIGHT;
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
     public Dir getDir() {
         return dir;
     }
@@ -75,6 +58,7 @@ public class Tank {
         this.dir = dir;
     }
 
+    @Override
     public void paint(Graphics g) {
         if (!living) {
             return;
