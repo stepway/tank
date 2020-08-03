@@ -1,17 +1,19 @@
 package cn.stepin.tank;
 
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by stepway on 2020/8/2.
  */
 public class GameModel {
     Tank myTank = new Tank(400, 500, Dir.UP, this, Group.GOOD);
-    java.util.List<Bullet> bullets = new ArrayList<>();
-    java.util.List<Tank> tanks = new ArrayList<>();
-    java.util.List<Explode> explodes = new ArrayList<>();
+    List<Bullet> bullets = new ArrayList<>();
+    List<Tank> tanks = new ArrayList<>();
+    List<Explode> explodes = new ArrayList<>();
 
     public GameModel() {
         int initTankCount = Integer.parseInt((String) PropertyMgr.get(PropertyMgr.INIT_TANK_COUNT));
