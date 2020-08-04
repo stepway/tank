@@ -1,9 +1,6 @@
 package cn.stepin.tank;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
@@ -14,7 +11,7 @@ import java.awt.event.WindowEvent;
  * Created by stepway on 2020/7/28.
  */
 public class TankFrame extends Frame {
-    GameModel gm = new GameModel();
+    GameModel gm = GameModel.getInstance();
 
     static final int GAME_WIDTH = PropertyMgr.getInt(PropertyMgr.GAME_WIDTH);
     static final int GAME_HEIGHT = PropertyMgr.getInt(PropertyMgr.GAME_HEIGHT);

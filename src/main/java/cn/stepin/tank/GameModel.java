@@ -10,16 +10,22 @@ import java.util.List;
  * Created by stepway on 2020/8/2.
  */
 public class GameModel {
-    Tank myTank = new Tank(400, 500, Dir.UP, this, Group.GOOD);
+    private static GameModel gameModel = new GameModel();
+
+    public static GameModel getInstance() {
+        return gameModel;
+    }
+
+    Tank myTank = new Tank(400, 500, Dir.UP, Group.GOOD);
     List<GameObject> gameObjects = new ArrayList<>();
     ColliderChain colliderChain = new ColliderChain();
 
-    public GameModel() {
+    private GameModel() {
         int initTankCount = Integer.parseInt((String) PropertyMgr.get(PropertyMgr.INIT_TANK_COUNT));
 
         //初始化敌方坦克
         for (int i = 0; i < initTankCount; i++) {
-            Tank tank = new Tank(50 + 75 * (i % 10), 80 + 75 * (i / 10), Dir.DOWN, this, Group.BAD);
+            Tank tank = new Tank(50 + 75 * (i % 10), 80 + 75 * (i / 10), Dir.DOWN, Group.BAD);
             tank.setMoving(true);
             add(tank);
         }

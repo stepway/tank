@@ -20,7 +20,6 @@ public class Tank extends GameObject {
     public Rectangle rect = new Rectangle();
 
     private boolean moving = false;
-    public GameModel gm = null;
     private boolean living = true;
 
     public Group group = Group.BAD;
@@ -29,11 +28,10 @@ public class Tank extends GameObject {
 
     private int oldX, oldY;
 
-    public Tank(int x, int y, Dir dir, GameModel tf, Group group) {
+    public Tank(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.gm = tf;
         this.group = group;
 
         rect.x = x;
@@ -155,8 +153,8 @@ public class Tank extends GameObject {
 
     public void die() {
         living = false;
-        gm.remove(this);
-        gm.add(new Explode(x, y, gm));
+        GameModel.getInstance().remove(this);
+        GameModel.getInstance().add(new Explode(x, y));
     }
 
     public boolean random() {

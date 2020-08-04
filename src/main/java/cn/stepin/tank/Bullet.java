@@ -13,18 +13,16 @@ public class Bullet extends GameObject{
 
     public Rectangle rect = new Rectangle();
 
-    private final GameModel gm;
     private Group group;
 
     private boolean living = true;
 
     private Dir dir;
 
-    public Bullet(int x, int y, Dir dir, GameModel gm, Group group) {
+    public Bullet(int x, int y, Dir dir, Group group) {
         this.x = x;
         this.y = y;
         this.dir = dir;
-        this.gm = gm;
         this.group = group;
 
         rect.x = x;
@@ -32,7 +30,7 @@ public class Bullet extends GameObject{
         rect.width = WIDTH;
         rect.height = HEIGHT;
 
-        this.gm.add(this);
+        GameModel.getInstance().add(this);
     }
 
     public boolean isLiving() {
@@ -94,6 +92,6 @@ public class Bullet extends GameObject{
 
     public void die() {
         living = false;
-        gm.remove(this);
+        GameModel.getInstance().remove(this);
     }
 }
