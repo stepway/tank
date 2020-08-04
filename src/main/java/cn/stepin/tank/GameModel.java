@@ -12,28 +12,36 @@ import java.util.List;
 public class GameModel {
     private static GameModel gameModel = new GameModel();
 
+    static {
+        gameModel.init();
+    }
+
     public static GameModel getInstance() {
         return gameModel;
     }
 
-    Tank myTank = new Tank(400, 500, Dir.UP, Group.GOOD);
+    Tank myTank;
     List<GameObject> gameObjects = new ArrayList<>();
     ColliderChain colliderChain = new ColliderChain();
 
     private GameModel() {
+    }
+
+    private void init() {
+        myTank = new Tank(400, 500, Dir.UP, Group.GOOD);
+
         int initTankCount = Integer.parseInt((String) PropertyMgr.get(PropertyMgr.INIT_TANK_COUNT));
 
         //初始化敌方坦克
         for (int i = 0; i < initTankCount; i++) {
             Tank tank = new Tank(50 + 75 * (i % 10), 80 + 75 * (i / 10), Dir.DOWN, Group.BAD);
             tank.setMoving(true);
-            add(tank);
         }
 
-        add(new Wall(150, 150, 200, 50));
-        add(new Wall(500, 150, 200, 50));
-        add(new Wall(300, 300, 50, 200));
-        add(new Wall(500, 300, 50, 200));
+        new Wall(150, 150, 200, 50);
+        new Wall(500, 150, 200, 50);
+        new Wall(300, 300, 50, 200);
+        new Wall(500, 300, 50, 200);
     }
 
     public void add(GameObject gameObject) {
