@@ -13,22 +13,18 @@ import java.awt.*;
 public class TankTankCollider implements Collider {
 
     @Override
-    public void collide(GameObject o1, GameObject o2) {
-        if (!(o1 instanceof Tank) || !(o2 instanceof Tank)) {
-            return;
+    public boolean collide(GameObject o1, GameObject o2) {
+        if (o1 instanceof Tank && o2 instanceof Tank) {
+            Tank t1 = (Tank) o1;
+            Tank t2 = (Tank) o2;
+            Rectangle rect1 = t1.rect;
+            Rectangle rect2 = t2.rect;
+            if (rect1.intersects(rect2)) {
+                t1.back();
+                t2.back();
+            }
         }
 
-        Tank t1 = (Tank) o1;
-        Tank t2 = (Tank) o2;
-
-        Rectangle rect1 = t1.rect;
-        Rectangle rect2 = t2.rect;
-        if (!rect1.intersects(rect2)) {
-            return;
-        }
-
-        t1.back();
-        t2.back();
-
+        return true;
     }
 }

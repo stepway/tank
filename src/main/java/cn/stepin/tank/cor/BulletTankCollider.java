@@ -12,13 +12,13 @@ import java.awt.*;
 public class BulletTankCollider implements Collider {
 
     @Override
-    public void collide(GameObject o1, GameObject o2) {
+    public boolean collide(GameObject o1, GameObject o2) {
         if (o1 instanceof Bullet && o2 instanceof Tank) {
             Bullet bullet = (Bullet)o1;
             Tank tank = (Tank) o2;
 
             if(bullet.getGroup().equals(tank.getGroup())){
-                return;
+                return true;
             }
 
             Rectangle rect1 = bullet.rect;
@@ -26,11 +26,11 @@ public class BulletTankCollider implements Collider {
             if (rect1.intersects(rect2)) {
                 tank.die();
                 bullet.die();
+                return false;
             }
         } else if (o1 instanceof Tank && o2 instanceof Bullet) {
-            collide(o2, o1);
-        } else {
-            return;
+            return collide(o2, o1);
         }
+        return true;
     }
 }
