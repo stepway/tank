@@ -19,10 +19,15 @@ public class GameModel {
 
         //初始化敌方坦克
         for (int i = 0; i < initTankCount; i++) {
-            Tank tank = new Tank(50 + 75 * (i % 10), 100 + 75 * (i / 10), Dir.DOWN, this, Group.BAD);
+            Tank tank = new Tank(50 + 75 * (i % 10), 80 + 75 * (i / 10), Dir.DOWN, this, Group.BAD);
             tank.setMoving(true);
             add(tank);
         }
+
+        add(new Wall(150, 150, 200, 50));
+        add(new Wall(500, 150, 200, 50));
+        add(new Wall(300, 300, 50, 200));
+        add(new Wall(500, 300, 50, 200));
     }
 
     public void add(GameObject gameObject) {
