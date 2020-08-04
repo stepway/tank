@@ -1,7 +1,9 @@
 package cn.stepin.tank.cor;
 
 import cn.stepin.tank.GameObject;
+import cn.stepin.tank.PropertyMgr;
 
+import java.lang.reflect.Constructor;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,8 +14,16 @@ public class ColliderChain implements Collider{
     private List<Collider> colliders = new LinkedList();
 
     public ColliderChain() {
-        add(new BulletTankCollider());
-        add(new TankTankCollider());
+        String[] colliderPackages = PropertyMgr.getString(PropertyMgr.COLLIDERS).split(",");
+        for (String colliderPackage : colliderPackages) {
+            try {
+                Constructor<?> declaredConstructor = Class.forName(colliderPackage).getDeclaredConstructor(null);
+                Collider collider = (Collider)declaredConstructor.newInstance(null);
+                add(collider);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void add(Collider collider) {
