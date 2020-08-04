@@ -86,7 +86,7 @@ public class Bullet extends GameObject{
         rect.y = y;
 
         if(x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT){
-            living = false;
+            die();
         }
     }
 
